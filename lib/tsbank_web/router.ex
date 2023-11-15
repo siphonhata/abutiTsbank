@@ -27,6 +27,8 @@ defmodule TsbankWeb.Router do
   scope "/api/v1", TsbankWeb do
     pipe_through :api
 
+    post "/notify_transfer", TransactionController, :notify_transfer
+    post "/transfer", TransactionController, :transfer
     #get "/register/new", UserController, :index
     post "/customer/create", UserController, :create #
     post "/customer/sign_in", UserController, :sign_in #

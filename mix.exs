@@ -46,7 +46,9 @@ defmodule Tsbank.MixProject do
       {:bcrypt_elixir, "~> 3.0"},
       {:prom_ex, "~> 1.8.0"},
       {:telemetry, "~> 1.0"},
-      {:ex_doc, "~> 0.19"}
+      {:ex_doc, "~> 0.19"},
+      {:httpoison, "~> 1.8"},
+      {:poison, "~> 5.0"}
     ]
   end
 

@@ -75,4 +75,37 @@ defmodule TsbankWeb.TransactionController do
     end
   end
 
+  def transfer(conn, %{"amount" => amount, "destination_account_id" => destination_account_id}) do
+    # Perform the transfer logic, update balances, etc.
+    # This could include making changes to your local database.
+
+    # Notify the receiver (Project B) about the transfer
+    send_notification_to_project_b(destination_account_id, amount)
+
+    conn
+    |> put_status(:ok)
+    |> json(%{message: "Transfer successful"})
+  end
+
+  defp send_notification_to_project_b(destination_account_id, amount) do
+    # Use HTTPoison or another HTTP client to make a POST request to Project B
+    url = "http://192.168.1.222:4003/api/notify_transfer"
+    body = %{amount: amount, destination_account_id: destination_account_id}
+
+    # Use your preferred HTTP client to send the request
+    HTTPoison.post(url, Poison.encode!(body), [{"Content-Type", "application/json"}])
+  end
+
+
+  def notify_transfer(conn, %{"amount" => amount, "destination_account_id" => destination_account_id}) do
+    # Perform the necessary actions on Project B, such as updating balances
+
+    IO.inspect(amount)
+    IO.inspect(destination_account_id)
+
+    conn
+    |> put_status(:ok)
+    |> json(%{message: "Transfer notification received"})
+  end
+
 end
